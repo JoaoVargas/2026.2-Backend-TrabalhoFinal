@@ -1,0 +1,22 @@
+info:
+  name: "Revoke role from user"
+  type: http
+  seq: 8
+
+http:
+  method: DELETE
+  url: "{{baseUrl}}/users/2/roles/ADMIN"
+  auth: inherit
+
+docs: |-
+  Revoga a role do usuário.
+
+  **Requer:** `ADMIN` (HTTP Basic).
+
+  `204` se revogada, `404` se o usuário não tinha a role.
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

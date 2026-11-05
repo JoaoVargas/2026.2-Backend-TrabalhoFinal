@@ -1,0 +1,35 @@
+info:
+  name: "Create user (register)"
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{baseUrl}}/users"
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "email": "{{customerEmail}}",
+        "password": "{{customerPassword}}",
+        "name": "Cliente Exemplo"
+      }
+  auth: none
+
+docs: |-
+  Cadastra um novo usuário.
+
+  **Acesso:** público.
+
+  Validações: `email` válido, `password` com no mínimo 4 caracteres, `name` não vazio.
+
+  Resposta: `201 Created` com `UserResponse`.
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

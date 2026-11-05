@@ -1,0 +1,23 @@
+info:
+  name: "Create order"
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: "{{baseUrl}}/orders"
+  auth:
+    type: basic
+    username: "{{customerEmail}}"
+    password: "{{customerPassword}}"
+
+docs: |-
+  Cria um pedido vazio para o usuário autenticado.
+
+  Resposta: `201 Created`.
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

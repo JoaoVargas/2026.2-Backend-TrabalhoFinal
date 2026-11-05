@@ -1,0 +1,22 @@
+info:
+  name: "Grant role to user"
+  type: http
+  seq: 7
+
+http:
+  method: PUT
+  url: "{{baseUrl}}/users/2/roles/ADMIN"
+  auth: inherit
+
+docs: |-
+  Concede a role (último segmento da URL) ao usuário.
+
+  **Requer:** `ADMIN` (HTTP Basic).
+
+  `200` se concedida, `204` se o usuário já possuía a role.
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

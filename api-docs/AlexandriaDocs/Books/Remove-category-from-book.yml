@@ -1,0 +1,20 @@
+info:
+  name: "Remove category from book"
+  type: http
+  seq: 7
+
+http:
+  method: DELETE
+  url: "{{baseUrl}}/books/1/categories/2"
+  auth: inherit
+
+docs: |-
+  **Requer:** `ADMIN` (HTTP Basic).
+
+  `204` se removido, `404` se o livro não tinha a categoria.
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

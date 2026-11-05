@@ -1,0 +1,29 @@
+info:
+  name: "Create category"
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: "{{baseUrl}}/categories"
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "name": "Mystery"
+      }
+  auth: inherit
+
+docs: |-
+  **Requer:** `ADMIN` (HTTP Basic).
+
+  Resposta: `201 Created`.
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -1,0 +1,7 @@
+info:
+  name: "Authors"
+  type: folder
+  seq: 4
+
+docs: |-
+  Autores dos livros. Um autor com livros associados não pode ser removido.

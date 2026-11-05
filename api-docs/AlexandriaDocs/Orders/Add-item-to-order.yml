@@ -1,0 +1,33 @@
+info:
+  name: "Add item to order"
+  type: http
+  seq: 4
+
+http:
+  method: POST
+  url: "{{baseUrl}}/orders/1/items"
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "bookId": 1,
+        "quantity": 2
+      }
+  auth:
+    type: basic
+    username: "{{customerEmail}}"
+    password: "{{customerPassword}}"
+
+docs: |-
+  Adiciona um livro ao pedido (`bookId` >= 1, `quantity` >= 1). O `unitPrice` é gravado no momento da compra.
+
+  Resposta: `201 Created` com o pedido atualizado.
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

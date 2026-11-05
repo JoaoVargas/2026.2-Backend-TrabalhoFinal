@@ -1,0 +1,36 @@
+info:
+  name: "Create book"
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: "{{baseUrl}}/books"
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "title": "Dune",
+        "isbn": "978-0-441-17271-9",
+        "price": 59.9,
+        "publishedYear": 1965,
+        "stock": 12,
+        "authorId": 2
+      }
+  auth: inherit
+
+docs: |-
+  **Requer:** `ADMIN` (HTTP Basic).
+
+  Validações: `title`/`isbn` não vazios, `price` > 0, `publishedYear` >= 1500, `stock` >= 0, `authorId` >= 1.
+
+  Resposta: `201 Created`.
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

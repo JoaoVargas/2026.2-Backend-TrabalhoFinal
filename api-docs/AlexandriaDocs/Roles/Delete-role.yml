@@ -1,0 +1,20 @@
+info:
+  name: "Delete role"
+  type: http
+  seq: 3
+
+http:
+  method: DELETE
+  url: "{{baseUrl}}/roles/MANAGER"
+  auth: inherit
+
+docs: |-
+  Remove a role pelo nome.
+
+  Resposta: `204 No Content`.
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -1,0 +1,20 @@
+info:
+  name: "Add category to book"
+  type: http
+  seq: 6
+
+http:
+  method: POST
+  url: "{{baseUrl}}/books/1/categories/2"
+  auth: inherit
+
+docs: |-
+  **Requer:** `ADMIN` (HTTP Basic).
+
+  `201` se o vínculo foi criado, `204` se já existia.
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

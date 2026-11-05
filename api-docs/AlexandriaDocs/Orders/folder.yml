@@ -1,0 +1,7 @@
+info:
+  name: "Orders"
+  type: folder
+  seq: 7
+
+docs: |-
+  Pedidos (carrinho). Exige login (HTTP Basic). Cada usuário só acessa seus pedidos; `ADMIN` acessa todos. Os requests usam o usuário `customer*` do environment — cadastre-o antes em **Users → Create user (register)**.

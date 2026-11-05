@@ -1,0 +1,20 @@
+info:
+  name: "Health check"
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: "{{baseUrl}}/health"
+  auth: none
+
+docs: |-
+  Retorna `{"status":"OK","service":"alexandria"}`.
+
+  **Acesso:** público (sem autenticação).
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

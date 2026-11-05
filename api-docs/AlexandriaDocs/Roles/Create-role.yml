@@ -1,0 +1,32 @@
+info:
+  name: "Create role"
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{baseUrl}}/roles"
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "name": "MANAGER",
+        "description": "Gerente da loja"
+      }
+  auth: inherit
+
+docs: |-
+  Cria uma role.
+
+  `name`: regex `[A-Z][A-Z0-9_]+`. `description` obrigatória.
+
+  Resposta: `201 Created`.
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

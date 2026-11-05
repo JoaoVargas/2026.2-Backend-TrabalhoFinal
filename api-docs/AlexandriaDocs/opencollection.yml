@@ -1,0 +1,33 @@
+opencollection: 1.0.0
+
+info:
+  name: AlexandriaDocs
+
+request:
+  auth:
+    type: basic
+    username: "{{adminEmail}}"
+    password: "{{adminPassword}}"
+
+docs: |-
+  # Alexandria API
+
+  API REST de uma livraria (Kotlin + Spring Boot).
+
+  - **Base URL local:** `http://localhost:8080/api` (context-path `/api`)
+  - **Base URL Docker:** `http://localhost:8081/api`
+  - **Autenticação:** HTTP Basic (stateless). Por padrão a collection usa o admin
+    seedado (`admin@alexandria.com` / `admin123`) via variáveis do environment.
+  - **Autorização:** todo `GET` é público; `POST /users` é público; criar/editar/remover
+    livros, autores, categorias e roles exige `ADMIN`; pedidos exigem apenas login.
+  - **Erros:** retornam `application/problem+json` (RFC 7807).
+  - **Swagger UI:** `{{baseUrl}}/swagger-ui/index.html`.
+
+  Selecione o environment **Local** ou **Docker** no canto superior direito.
+
+bundled: false
+extensions:
+  bruno:
+    ignore:
+      - node_modules
+      - .git

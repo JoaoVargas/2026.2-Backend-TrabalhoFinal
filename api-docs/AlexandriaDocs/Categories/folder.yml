@@ -1,0 +1,7 @@
+info:
+  name: "Categories"
+  type: folder
+  seq: 5
+
+docs: |-
+  Categorias/gêneros dos livros.

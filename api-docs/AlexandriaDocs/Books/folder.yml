@@ -1,0 +1,7 @@
+info:
+  name: "Books"
+  type: folder
+  seq: 6
+
+docs: |-
+  Catálogo de livros, com filtros/ordenação e vínculo com categorias (many-to-many).

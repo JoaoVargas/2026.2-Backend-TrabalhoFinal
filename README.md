@@ -5,6 +5,8 @@ construída em **Kotlin + Spring Boot 4**, estendendo o `authserver` visto em
 aula (usuários, papéis/roles e autenticação) com um catálogo de livros,
 autores, categorias e pedidos.
 
+**Alunos:** Felipe Bresciani Janz, João Guilherme Vargas e Vinicius Machado de Moura
+
 ## Arquitetura
 
 Organização por pacote de domínio (igual ao padrão usado em aula), cada um

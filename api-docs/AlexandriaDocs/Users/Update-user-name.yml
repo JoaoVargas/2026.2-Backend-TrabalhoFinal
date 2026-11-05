@@ -1,0 +1,31 @@
+info:
+  name: "Update user name"
+  type: http
+  seq: 5
+
+http:
+  method: PATCH
+  url: "{{baseUrl}}/users/1"
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "name": "Novo Nome"
+      }
+  auth: inherit
+
+docs: |-
+  Atualiza o nome do usuário.
+
+  **Requer:** ser o próprio usuário (`id` == usuário autenticado) ou `ADMIN`.
+
+  Retorna `200` com o usuário atualizado ou `204` se nada mudou.
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

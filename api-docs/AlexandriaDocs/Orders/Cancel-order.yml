@@ -1,0 +1,21 @@
+info:
+  name: "Cancel order"
+  type: http
+  seq: 6
+
+http:
+  method: DELETE
+  url: "{{baseUrl}}/orders/1"
+  auth:
+    type: basic
+    username: "{{customerEmail}}"
+    password: "{{customerPassword}}"
+
+docs: |-
+  Cancela o pedido. Retorna `200` com o pedido atualizado.
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

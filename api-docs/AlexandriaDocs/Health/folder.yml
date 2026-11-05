@@ -1,0 +1,7 @@
+info:
+  name: "Health"
+  type: folder
+  seq: 1
+
+docs: |-
+  Verificação de disponibilidade do serviço.

@@ -1,0 +1,44 @@
+info:
+  name: "Search books"
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: "{{baseUrl}}/books"
+  params:
+    - name: title
+      value: "hobbit"
+      type: query
+    - name: categoryId
+      value: "1"
+      type: query
+    - name: minPrice
+      value: "10"
+      type: query
+    - name: maxPrice
+      value: "100"
+      type: query
+    - name: sortBy
+      value: "price"
+      type: query
+    - name: sortDir
+      value: "DESC"
+      type: query
+  auth: none
+
+docs: |-
+  Lista/filtra livros. Todos os params são opcionais:
+
+  - `title` — trecho do título
+  - `authorId`, `categoryId`
+  - `minPrice`, `maxPrice`
+  - `sortBy` (padrão `title`), `sortDir` (`ASC`|`DESC`, padrão `ASC`)
+
+  **Acesso:** público (sem autenticação).
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

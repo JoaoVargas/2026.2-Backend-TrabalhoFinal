@@ -1,0 +1,12 @@
+name: Docker
+variables:
+  - name: baseUrl
+    value: http://localhost:8081/api
+  - name: adminEmail
+    value: admin@alexandria.com
+  - name: adminPassword
+    value: admin123
+  - name: customerEmail
+    value: cliente@example.com
+  - name: customerPassword
+    value: senha123

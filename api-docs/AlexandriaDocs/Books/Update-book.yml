@@ -1,0 +1,34 @@
+info:
+  name: "Update book"
+  type: http
+  seq: 4
+
+http:
+  method: PUT
+  url: "{{baseUrl}}/books/1"
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "title": "The Hobbit",
+        "isbn": "978-0-345-33968-3",
+        "price": 42.5,
+        "publishedYear": 1937,
+        "stock": 15,
+        "authorId": 1
+      }
+  auth: inherit
+
+docs: |-
+  **Requer:** `ADMIN` (HTTP Basic).
+
+  Substitui todos os campos do livro.
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

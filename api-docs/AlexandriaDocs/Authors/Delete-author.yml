@@ -1,0 +1,20 @@
+info:
+  name: "Delete author"
+  type: http
+  seq: 5
+
+http:
+  method: DELETE
+  url: "{{baseUrl}}/authors/3"
+  auth: inherit
+
+docs: |-
+  **Requer:** `ADMIN` (HTTP Basic).
+
+  `204` em sucesso; erro de conflito se o autor ainda tiver livros.
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

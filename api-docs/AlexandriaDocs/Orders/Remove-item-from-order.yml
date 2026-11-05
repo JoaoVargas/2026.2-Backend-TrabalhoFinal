@@ -1,0 +1,23 @@
+info:
+  name: "Remove item from order"
+  type: http
+  seq: 5
+
+http:
+  method: DELETE
+  url: "{{baseUrl}}/orders/1/items/1"
+  auth:
+    type: basic
+    username: "{{customerEmail}}"
+    password: "{{customerPassword}}"
+
+docs: |-
+  Remove um item do pedido.
+
+  `204` se removido, `404` se o item não existir.
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

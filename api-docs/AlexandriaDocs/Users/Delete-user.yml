@@ -1,0 +1,22 @@
+info:
+  name: "Delete user"
+  type: http
+  seq: 6
+
+http:
+  method: DELETE
+  url: "{{baseUrl}}/users/2"
+  auth: inherit
+
+docs: |-
+  Remove um usuário.
+
+  **Requer:** `ADMIN` (HTTP Basic).
+
+  Resposta: `204 No Content`.
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
