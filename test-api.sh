@@ -287,6 +287,24 @@ expect_eq "$(jq_get '.status')" "CANCELED" "pedido ficou com status CANCELED"
 call GET "/books/$ORDER_BOOK_ID"
 expect_eq "$(jq_get '.stock')" "5" "estoque voltou ao cancelar o pedido"
 
+call DELETE "/orders/$ORDER_ID" "$CUSTOMER"
+expect_status 409 "cancelar pedido ja cancelado -> 409"
+call POST "/orders/$ORDER_ID/items" "$CUSTOMER" "{\"bookId\":$ORDER_BOOK_ID,\"quantity\":1}"
+expect_status 409 "adicionar item em pedido cancelado -> 409"
+
+call POST /orders "$CUSTOMER" ""
+CHECKOUT_ID=$(jq_get '.id')
+call POST "/orders/$CHECKOUT_ID/checkout" "$CUSTOMER" ""
+expect_status 409 "checkout de pedido vazio -> 409"
+call POST "/orders/$CHECKOUT_ID/items" "$CUSTOMER" "{\"bookId\":$ORDER_BOOK_ID,\"quantity\":1}"
+call POST "/orders/$CHECKOUT_ID/checkout" "$OTHER" ""
+expect_status 403 "checkout de pedido alheio -> 403"
+call POST "/orders/$CHECKOUT_ID/checkout" "$CUSTOMER" ""
+expect_status 200 "POST /orders/{id}/checkout pelo dono -> 200"
+expect_eq "$(jq_get '.status')" "COMPLETED" "pedido ficou com status COMPLETED"
+call DELETE "/orders/$CHECKOUT_ID" "$CUSTOMER"
+expect_status 409 "cancelar pedido finalizado -> 409"
+
 # --- 11. recursos inexistentes (404) ---------------------------------------
 
 section "11. 404 para recursos inexistentes"

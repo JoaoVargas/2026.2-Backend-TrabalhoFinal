@@ -48,6 +48,12 @@ class OrderController(
         if (service.removeItem(id, itemId, user)) ResponseEntity.noContent().build()
         else ResponseEntity.notFound().build()
 
+    @PostMapping("/{id}/checkout")
+    fun checkout(
+        @Min(1) @PathVariable id: Long,
+        @AuthenticationPrincipal user: User
+    ) = OrderResponse(service.checkout(id, user)).let { ResponseEntity.ok(it) }
+
     @DeleteMapping("/{id}")
     fun cancel(
         @Min(1) @PathVariable id: Long,

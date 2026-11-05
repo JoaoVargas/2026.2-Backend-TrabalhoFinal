@@ -1,7 +1,7 @@
 info:
   name: "Cancel order"
   type: http
-  seq: 6
+  seq: 7
 
 http:
   method: DELETE
@@ -12,7 +12,9 @@ http:
     password: "{{customerPassword}}"
 
 docs: |-
-  Cancela o pedido. Retorna `200` com o pedido atualizado.
+  Cancela o pedido `OPEN` e devolve o estoque. `409` se já estiver `COMPLETED` ou `CANCELED`.
+
+  Retorna `200` com o pedido atualizado.
 
 settings:
   encodeUrl: true

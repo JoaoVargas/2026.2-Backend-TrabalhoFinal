@@ -1,0 +1,25 @@
+info:
+  name: "Checkout order"
+  type: http
+  seq: 6
+
+http:
+  method: POST
+  url: "{{baseUrl}}/orders/1/checkout"
+  auth:
+    type: basic
+    username: "{{customerEmail}}"
+    password: "{{customerPassword}}"
+
+docs: |-
+  Finaliza o pedido: status `OPEN` → `COMPLETED`.
+
+  Regras: o pedido precisa estar `OPEN` e ter ao menos um item; caso contrário `409 Conflict`. Depois de finalizado, não aceita mais itens nem cancelamento.
+
+  Resposta: `200` com o pedido atualizado.
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

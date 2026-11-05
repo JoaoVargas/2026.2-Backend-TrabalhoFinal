@@ -1,6 +1,7 @@
 package br.pucpr.alexandria.orders
 
 import br.pucpr.alexandria.books.BookService
+import br.pucpr.alexandria.common.ConflictException
 import br.pucpr.alexandria.common.NotFoundException
 import br.pucpr.alexandria.users.User
 import org.slf4j.LoggerFactory
@@ -36,6 +37,7 @@ class OrderService(
 
     fun addItem(orderId: Long, bookId: Long, quantity: Int, user: User): Order {
         val order = findOwnedOrThrow(orderId, user)
+        assertOpen(order)
         val book = bookService.findByIdOrThrow(bookId)
 
         bookService.reserveStock(book, quantity)
@@ -47,6 +49,7 @@ class OrderService(
 
     fun removeItem(orderId: Long, itemId: Long, user: User): Boolean {
         val order = findOwnedOrThrow(orderId, user)
+        assertOpen(order)
         val item = order.items.find { it.id == itemId } ?: return false
 
         bookService.releaseStock(item.book, item.quantity)
@@ -58,11 +61,27 @@ class OrderService(
 
     fun cancel(orderId: Long, user: User): Order {
         val order = findOwnedOrThrow(orderId, user)
+        assertOpen(order)
         order.items.forEach { bookService.releaseStock(it.book, it.quantity) }
         order.status = OrderStatus.CANCELED
         val saved = repository.save(order)
         log.info("Order {} canceled", order.id)
         return saved
+    }
+
+    fun checkout(orderId: Long, user: User): Order {
+        val order = findOwnedOrThrow(orderId, user)
+        assertOpen(order)
+        if (order.items.isEmpty()) throw ConflictException("Order ${order.id} has no items!")
+        order.status = OrderStatus.COMPLETED
+        val saved = repository.save(order)
+        log.info("Order {} completed", order.id)
+        return saved
+    }
+
+    private fun assertOpen(order: Order) {
+        if (order.status != OrderStatus.OPEN)
+            throw ConflictException("Order ${order.id} is ${order.status} and can no longer be changed!")
     }
 
     private fun assertOwnerOrAdmin(order: Order, user: User) {

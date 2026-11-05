@@ -4,7 +4,7 @@ import br.pucpr.alexandria.users.User
 import jakarta.persistence.*
 import java.time.Instant
 
-enum class OrderStatus { OPEN, CANCELED }
+enum class OrderStatus { OPEN, COMPLETED, CANCELED }
 
 @Entity
 @Table(name = "orders")
