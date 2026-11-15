@@ -7,6 +7,8 @@ autores, categorias e pedidos.
 
 **Alunos:** Felipe Bresciani Janz, João Guilherme Vargas e Vinicius Machado de Moura
 
+**Link do vídeo:** [https://youtu.be/BVyNHltJrro](https://youtu.be/BVyNHltJrro)
+
 ## Arquitetura
 
 Organização por pacote de domínio (igual ao padrão usado em aula), cada um
