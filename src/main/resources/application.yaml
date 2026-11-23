@@ -30,6 +30,11 @@ springdoc:
   swagger-ui:
     use-root-path: true
 
+app:
+  jwt:
+    secret: ${JWT_SECRET:alexandria-pucpr-trabalho-final-dev-secret-change-in-prod-2026}
+    expiration-minutes: ${JWT_EXPIRATION_MINUTES:60}
+
 logging:
   level:
     br.pucpr.alexandria: INFO

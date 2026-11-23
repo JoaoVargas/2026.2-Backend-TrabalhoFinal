@@ -17,7 +17,6 @@ import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Component
 import java.math.BigDecimal
 
-/** Seeds reference data so the API is explorable right after startup, both locally and in Docker. */
 @Component
 class BootStrapper(
     private val roleRepository: RoleRepository,

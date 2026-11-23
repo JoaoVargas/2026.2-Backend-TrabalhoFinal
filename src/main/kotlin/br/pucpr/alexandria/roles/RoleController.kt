@@ -3,6 +3,7 @@ package br.pucpr.alexandria.roles
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
 
@@ -19,6 +20,7 @@ class RoleController(
             .let { ResponseEntity.ok(it) }
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     fun insert(
         @Valid @RequestBody role: RoleRequest
     ) = service.insert(role.toRole())
@@ -26,6 +28,7 @@ class RoleController(
         .let { ResponseEntity.status(HttpStatus.CREATED).body(it) }
 
     @DeleteMapping("/{name}")
+    @PreAuthorize("hasRole('ADMIN')")
     fun deleteByName(@PathVariable name: String): ResponseEntity<Void> {
         service.deleteByName(name)
         return ResponseEntity.noContent().build()

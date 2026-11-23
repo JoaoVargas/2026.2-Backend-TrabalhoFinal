@@ -4,6 +4,7 @@ plugins {
 	kotlin("plugin.jpa") version "2.2.21"
 	id("org.springframework.boot") version "4.0.7"
 	id("io.spring.dependency-management") version "1.1.7"
+	jacoco
 }
 
 group = "br.pucpr"
@@ -26,12 +27,18 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:3.0.2")
 	implementation("tools.jackson.module:jackson-module-kotlin")
+
+	implementation("io.jsonwebtoken:jjwt-api:0.12.6")
+	runtimeOnly("io.jsonwebtoken:jjwt-impl:0.12.6")
+	runtimeOnly("io.jsonwebtoken:jjwt-gson:0.12.6")
+
 	testImplementation("org.springframework.boot:spring-boot-starter-validation-test")
 	testImplementation("org.springframework.boot:spring-boot-starter-webmvc-test")
+	testImplementation("org.springframework.security:spring-security-test")
 	testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
+	testImplementation("org.mockito.kotlin:mockito-kotlin:5.4.0")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
-	// Banco de dados
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-h2console")
 	runtimeOnly("com.h2database:h2")
@@ -45,8 +52,21 @@ kotlin {
 	}
 }
 
+jacoco {
+	toolVersion = "0.8.12"
+}
+
 tasks.withType<Test> {
 	useJUnitPlatform()
+	finalizedBy(tasks.jacocoTestReport)
+}
+
+tasks.jacocoTestReport {
+	dependsOn(tasks.test)
+	reports {
+		xml.required = true
+		html.required = true
+	}
 }
 
 allOpen {
